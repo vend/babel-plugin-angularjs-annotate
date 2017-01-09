@@ -433,7 +433,10 @@ function matchProp(name, props) {
 
         if ((t.isIdentifier(prop.key) && prop.key.name === name) ||
             (t.isLiteral(prop.key) && prop.key.value === name)) {
-            return (propOrPath.get && propOrPath.get("value")) || prop.value; // FunctionExpression or ArrayExpression
+              if(t.isObjectMethod(prop)){
+                return propOrPath;
+              }
+              return (propOrPath.get && propOrPath.get("value")) || prop.value; // FunctionExpression or ArrayExpression
         }
     }
     return null;
@@ -443,7 +446,10 @@ function matchResolve(props) {
     const resolveObject = matchProp("resolve", props);
     if (resolveObject && t.isObjectExpression(resolveObject)) {
         return resolveObject.get("properties").map(function(prop) {
-            return prop.get("value");
+            if(t.isObjectMethod(prop)){
+              return prop;
+            }
+             return prop.get("value");
         });
     }
     return [];
@@ -555,6 +561,21 @@ function judgeSuspects(ctx) {
         let target = path.node || path;
         if (target.$chained !== chainedRegular) {
             return;
+        }
+
+        if(t.isObjectMethod(path) && target.params.length){
+          // Replace object method shorthand { foo(bar){} } with long-form { foo: function(bar){} } so we can annotate it
+          const func = t.functionExpression(null, target.params, target.body, target.generator, target.async);
+          func.returnType = target.returnType;
+
+          path.replaceWith(t.objectProperty(
+            target.key,
+            func,
+            target.computed
+          ));
+
+          path = path.get("value");
+          target = path.node;
         }
 
         if (isFunctionExpressionWithArgs(target) && !t.isVariableDeclarator(path.parent)) {

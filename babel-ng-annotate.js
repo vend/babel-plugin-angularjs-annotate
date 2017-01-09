@@ -113,6 +113,11 @@ module.exports = function() {
           ngInject.inspectFunction(path, ctx);
         }
       },
+      ObjectMethod: {
+        enter(path) {
+          ngInject.inspectFunction(path, ctx);
+        }
+      },
       CallExpression: {
         enter(path) {
           ngInject.inspectCallExpression(path, ctx);

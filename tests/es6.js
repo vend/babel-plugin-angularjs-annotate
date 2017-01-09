@@ -151,6 +151,36 @@ module.exports = {
       svc.$inject = ['dep1'];
       svc.foo = 'bar';
     }
+  }, {
+    name: "object method",
+    explicit: true,
+    input: function() {
+      var foo = {
+        bar(baz){
+          'ngInject';
+        }
+      };
+    },
+    expected: function() {
+      var foo = {
+        bar: ['baz', function(baz) {
+          'ngInject';
+        }]
+      }
+    }
+  }, {
+    name: "implicit object method",
+    explicit: false,
+    input: function() {
+      angular.component('myComponent', {
+        controller(a){}
+      });
+    },
+    expected: function() {
+      angular.component('myComponent', {
+        controller: ['a', function(a){}]
+      });
+    }
   }
  ]
 };

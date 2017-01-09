@@ -11,6 +11,7 @@ module.exports = {
                 simpleObj: function() { a },
                 promiseObj: function($scope, $timeout) { b },
                 translations: "translations",
+                objMethod(a) { a }
             },
             params: {
                 simple: function($scope) {},
@@ -33,6 +34,11 @@ module.exports = {
                     templateProvider: function($scope) {},
                     controller: function($scope) {},
                 },
+                viewc: {
+                  dontAlterMe(arg) {},
+                  templateProvider($scope) {},
+                  controller($scope) {}
+                },
                 dontAlterMe: null,
             },
             controller: function($scope, simpleObj, promiseObj, translations) { c },
@@ -54,6 +60,7 @@ module.exports = {
                 simpleObj: function() { a },
                 promiseObj: ["$scope", "$timeout", function($scope, $timeout) { b }],
                 translations: "translations",
+                objMethod: ["a", function(a) { a }]
             },
             params: {
                 simple: ["$scope", function($scope) {}],
@@ -75,6 +82,11 @@ module.exports = {
                     dontAlterMe: function(arg) {},
                     templateProvider: ["$scope", function($scope) {}],
                     controller: ["$scope", function($scope) {}],
+                },
+                viewc: {
+                  dontAlterMe(arg) {},
+                  templateProvider: ["$scope", function($scope) {}],
+                  controller: ["$scope", function($scope) {}]
                 },
                 dontAlterMe: null,
             },
