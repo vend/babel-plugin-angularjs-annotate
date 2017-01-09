@@ -1,5 +1,8 @@
 # babel-plugin-angularjs-annotate changelog
 
+## v0.7.0 2017-01-09
+ * New Feature: Support for ES6 Object Method shorthand (#16)
+
 ## v0.6.0 2016-10-14
  * New Feature: print a warning if we ask to re-annotate an DI injection array if the new parameters do not match, and throw an exception if the number of parameters is wrong.
 
