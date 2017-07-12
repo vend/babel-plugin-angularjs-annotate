@@ -124,6 +124,29 @@ module.exports = {
     `
   },
   {
+    name: "exported anonymous class",
+    explicit: true,
+    noES5: true,
+    input: `
+      export default class {
+        constructor($timeout) {
+          'ngInject';
+          return 'foo';
+        }
+      }
+    `,
+    expected: `
+    export default class _ngInjectAnonymousClass {
+      constructor($timeout) {
+        'ngInject';
+
+        return 'foo';
+      }
+    }
+    _ngInjectAnonymousClass.$inject = ['$timeout'];
+    `
+  },
+  {
     name: "annotated constructor",
     explicit: true,
     input: function(){

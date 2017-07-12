@@ -750,6 +750,9 @@ function judgeInjectArraySuspect(path, ctx) {
     node = path.node;
 
     if (t.isClass(node)){
+        if (!node.id) {
+            node.id = path.scope.generateUidIdentifier('ngInjectAnonymousClass');
+        }
         declaratorName = node.id.name;
         node = getConstructor(node);
     }
