@@ -765,9 +765,14 @@ function judgeInjectArraySuspect(path, ctx) {
         addInjectArrayAfterPath(node.params, opath, declaratorName);
 
     } else if (isFunctionDeclarationWithArgs(node)) {
-        // /*@ngInject*/ function foo($scope) {}
-        addInjectArrayBeforePath(node.params,path,node.id.name);
-
+        if (t.isExportDefaultDeclaration(path.parent) && !node.id) {
+          // export default function(a) {}
+          node.id = path.scope.generateUidIdentifier('ngInjectExport');
+          path.parentPath.insertBefore(buildInjectExpression(node.params, node.id.name));
+      } else {
+          // /*@ngInject*/ function foo($scope) {}
+          addInjectArrayBeforePath(node.params,path,node.id.name);
+      }
     } else if (t.isExpressionStatement(node) && t.isAssignmentExpression(node.expression) &&
         isFunctionExpressionWithArgs(node.expression.right) && !path.get("expression.right").$seen) {
         // /*@ngInject*/ foo.bar[0] = function($scope) {}

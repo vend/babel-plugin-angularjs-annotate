@@ -60,6 +60,23 @@ module.exports = {
     `
   },
   {
+    name: "exported anonymous function",
+    explicit: true,
+    input: `
+      export default function ($timeout) {
+        'ngInject';
+        return 'foo';
+      }
+    `,
+    expected: `
+      _ngInjectExport.$inject = ['$timeout'];
+      export default function _ngInjectExport($timeout) {
+        'ngInject';
+        return 'foo';
+      }
+    `
+  },
+  {
     name: "annotated class",
     explicit: true,
     input: function(){
