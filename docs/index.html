@@ -87,7 +87,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/mode/javascript/javascript.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.10.3/babel.js"></script>
+<script src='https://unpkg.com/babel-standalone@6/babel.js' defer></script>
+<script src='https://unpkg.com/babel-polyfill@6/dist/polyfill.min.js' defer></script>
+<script src='https://unpkg.com/babel-preset-env-standalone@0.0.6/babel-preset-env.js' defer></script>
 <script src="repl-browser.js"></script>
 
 <script>
@@ -105,7 +107,7 @@
         continueComments: "Enter",
         readOnly: true
 	};
-	
+
 	var input = CodeMirror(document.getElementById('input'), inputOpts);
 	var output = CodeMirror(document.getElementById('output'), outputOpts);
 
