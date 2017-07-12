@@ -252,6 +252,11 @@ module.exports = {
               }
           }
       });
+      myMod.directive("foo", ($scope) => ({
+          controller: ($scope, $timeout) => {
+              bar;
+          }
+      }));
     },
     expected: function(){
       // directive return object
@@ -269,6 +274,11 @@ module.exports = {
               }
           }
       }]);
+      myMod.directive("foo", ["$scope", ($scope) => ({
+          controller: ["$scope", "$timeout", ($scope, $timeout) => {
+              bar;
+          }]
+      })]);
     }
   },
   {

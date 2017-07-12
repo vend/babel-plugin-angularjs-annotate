@@ -106,6 +106,12 @@ module.exports = function() {
       ArrowFunctionExpression: {
         enter(path) {
           ngInject.inspectFunction(path, ctx);
+        },
+        exit(path, state) {
+          if(!state.opts.explicitOnly){
+            let targets = matchDirectiveReturnObject(path);
+            addTargets(targets);
+          }
         }
       },
       FunctionDeclaration: {

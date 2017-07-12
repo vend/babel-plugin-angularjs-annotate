@@ -73,9 +73,9 @@ function matchDirectiveReturnObject(path) {
     // only matches inside directives
     // return { .. controller: function($scope, $timeout), ...}
 
-    return limit("directive", t.isReturnStatement(node) &&
-        node.argument && t.isObjectExpression(node.argument) &&
-        matchProp("controller", (path.get && path.get("argument.properties") || node.argument.properties)));
+    return limit("directive",
+        (t.isReturnStatement(node) && node.argument && t.isObjectExpression(node.argument) && matchProp("controller", (path.get && path.get("argument.properties") || node.argument.properties))) ||
+        (t.isArrowFunctionExpression(node) && node.body && t.isObjectExpression(node.body) && matchProp("controller", (path.get && path.get("body.properties") || node.body.properties))));
 }
 
 function limit(name, path) {
