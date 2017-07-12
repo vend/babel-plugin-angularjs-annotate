@@ -387,6 +387,17 @@ module.exports = {
             });
         }
       }
+    },
+    {
+      name: "var x = /** @ngInject **/ function($scope)",
+      input: function(){
+        var x = /** @ngInject **/ function($scope) {
+        };
+      },
+      expected: function(){
+        var x = /** @ngInject **/ function($scope) {};
+        x.$inject = ["$scope"]
+      }
     }
   ].map(t => { t.explicit=true; return t; })
 }

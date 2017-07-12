@@ -124,7 +124,10 @@ function getAnnotation(node){
   }
 
   for(var i=0; i<node.leadingComments.length; i++){
-    let value = node.leadingComments[i].value.trim();
+    let value = node.leadingComments[i].value
+    .replace(/^[\s\*]*/, '')
+    .replace(/[\s\*]*$/, '')
+    .trim();
 
     if(value === "@ngInject"){
       return true;
