@@ -1,5 +1,10 @@
 # babel-plugin-angularjs-annotate changelog
 
+## 0.8.0 2017-07-12
+ * New Feature: Support exported anonymous functions (#17)
+ * New Feature: Support exported anonymous classes (#24)
+ * New Feature: Allow multiple asterisks, ie. (`/** @ngInject **/`) (#23)
+
 ## v0.7.0 2017-01-09
  * New Feature: Support for ES6 Object Method shorthand (#16)
 
