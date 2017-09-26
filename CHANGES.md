@@ -1,5 +1,8 @@
 # babel-plugin-angularjs-annotate changelog
 
+## 0.8.2 2017-09-26
+ * bugfix: Fix issue w/ `$inject` hoisting and nested injected blocks (#29)
+
 ## 0.8.1 2017-09-26
  * bugfix: Annotate functions inside of functions w/ default arguments (#30)
 
