@@ -1,5 +1,8 @@
 # babel-plugin-angularjs-annotate changelog
 
+## 0.8.1 2017-09-26
+ * bugfix: Annotate functions inside of functions w/ default arguments (#30)
+
 ## 0.8.0 2017-07-12
  * New Feature: Support exported anonymous functions (#17)
  * New Feature: Support exported anonymous classes (#24)
