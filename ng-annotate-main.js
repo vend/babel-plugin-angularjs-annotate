@@ -771,6 +771,7 @@ function judgeInjectArraySuspect(path, ctx) {
         if (t.isExportDefaultDeclaration(path.parent) && !node.id) {
           // export default function(a) {}
           node.id = path.scope.generateUidIdentifier('ngInjectExport');
+          path.parentPath.scope.crawl();
           path.parentPath.insertBefore(buildInjectExpression(node.params, node.id.name));
       } else {
           // /*@ngInject*/ function foo($scope) {}
@@ -780,6 +781,7 @@ function judgeInjectArraySuspect(path, ctx) {
         isFunctionExpressionWithArgs(node.expression.right) && !path.get("expression.right").$seen) {
         // /*@ngInject*/ foo.bar[0] = function($scope) {}
         let inject = buildInjectExpression(node.expression.right.params, t.cloneDeep(node.expression.left));
+        path.parentPath.scope.crawl();
         path.insertAfter(inject);
 
     } else if (path = followReference(path)) {
@@ -792,7 +794,7 @@ function judgeInjectArraySuspect(path, ctx) {
 
     function buildInjectExpression(params, name){
         let left = t.isNode(name) ? name : t.identifier(name);
-        let paramStrings = params.map(param => t.stringLiteral(param.name));
+        let paramStrings = params.map(param => t.stringLiteral(getNamedParam(param)));
         let arr = t.arrayExpression(paramStrings); // ["$scope"]
         let member = t.memberExpression(left, t.identifier("$inject")); // foo.$inject =
         return t.expressionStatement(t.assignmentExpression("=", member , arr));
@@ -810,6 +812,7 @@ function judgeInjectArraySuspect(path, ctx) {
             }
             block.unshiftContainer("body", [expr]);
         } else {
+            path.parentPath.scope.crawl();
             path.insertBefore(buildInjectExpression(params, name));
         }
     }
@@ -820,6 +823,7 @@ function judgeInjectArraySuspect(path, ctx) {
             trailingComments = path.node.trailingComments;
             path.node.trailingComments = [];
         }
+        path.parentPath.scope.crawl();
         let newNode = path.insertAfter(buildInjectExpression(params, name));
         newNode.trailingComments = trailingComments;
     }
@@ -868,6 +872,12 @@ function isFunctionDeclarationWithArgs(node) {
 }
 function isGenericProviderName(node) {
     return t.isLiteral(node) && is.string(node.value);
+}
+
+function getNamedParam(p) {
+  let param = p;
+  if (t.isAssignmentPattern(p)) param = p.left;
+  return param.name;
 }
 
 function getConstructor(node){

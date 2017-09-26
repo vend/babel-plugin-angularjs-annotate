@@ -199,6 +199,26 @@ module.exports = {
           "ngInject"
         }])
       }
+    },
+    {
+      name: "default outer function parameters",
+      input: function(){
+        var outside = function (arg = {}){
+          var inside = function ($q) {
+            'ngInject'
+          };
+          return inside;
+        };
+      }, expected: function() {
+        var outside = function(arg = {}) {
+          var inside = function ($q) {
+            'ngInject';
+          };
+          inside.$inject = ['$q'];
+          return inside;
+        };
+      },
+      explicit: true
     }
   ]
 }
