@@ -506,6 +506,7 @@ function insertArray(ctx, path) {
             t.arrayExpression(elems)
         )
     );
+    path.scope.crawl();
 
 }
 

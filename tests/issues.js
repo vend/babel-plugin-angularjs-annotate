@@ -219,6 +219,27 @@ module.exports = {
         };
       },
       explicit: true
+    },
+    {
+      name: "nested array injections w/ hoisting",
+      input: function(){
+        module.exports = function($filterProvider) {
+          'ngInject';
+          function ordinalSuffixFilter(ordinalSuffix) {
+            'ngInject';
+          }
+        };
+      },
+      expected: function(){
+        module.exports = ['$filterProvider', function($filterProvider) {
+          'ngInject';
+          ordinalSuffixFilter.$inject = ['ordinalSuffix'];
+          function ordinalSuffixFilter(ordinalSuffix) {
+            'ngInject';
+          }
+        }];
+      },
+      explicit: true
     }
   ]
 }
