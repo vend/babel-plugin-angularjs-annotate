@@ -225,11 +225,11 @@ module.exports = {
                 }
             }
 
-            angular.module('MyMod').directive('testDirective', testDirective);
+            angular.module("MyMod").directive("testDirective", testDirective);
         },
         expected: function () {
             function testDirective() {
-                testFeedbackController.$inject = ['foo'];
+                testFeedbackController.$inject = ["foo"];
                 var directiveDefinition = {
                     controller: testFeedbackController
                 };
@@ -240,7 +240,7 @@ module.exports = {
                 }
             }
 
-            angular.module('MyMod').directive('testDirective', testDirective);
+            angular.module("MyMod").directive("testDirective", testDirective);
         }
     }
   ]
