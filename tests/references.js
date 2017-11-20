@@ -209,6 +209,39 @@ module.exports = {
             angular.module("test.feedback.pkg", [])
                 .component("testFeedback", testFeedback);
         }
+    },
+    {
+        name: "directive definition as a variable",
+        implicit: true,
+        input: function () {
+            function testDirective() {
+                var directiveDefinition = {
+                    controller: testFeedbackController
+                };
+
+                return directiveDefinition;
+
+                function testFeedbackController(foo) {
+                }
+            }
+
+            angular.module('MyMod').directive('testDirective', testDirective);
+        },
+        expected: function () {
+            function testDirective() {
+                testFeedbackController.$inject = ['foo'];
+                var directiveDefinition = {
+                    controller: testFeedbackController
+                };
+
+                return directiveDefinition;
+
+                function testFeedbackController(foo) {
+                }
+            }
+
+            angular.module('MyMod').directive('testDirective', testDirective);
+        }
     }
   ]
 }
