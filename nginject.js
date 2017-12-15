@@ -124,15 +124,17 @@ function getAnnotation(node){
   }
 
   for(var i=0; i<node.leadingComments.length; i++){
-    let value = node.leadingComments[i].value
-    .replace(/^[\s\*]*/, '')
-    .replace(/[\s\*]*$/, '')
-    .trim();
+    for(const line of node.leadingComments[i].value.split("\n")) {
+      let value = line
+      .replace(/^[\s\*]*/, '')
+      .replace(/[\s\*]*$/, '')
+      .trim();
 
-    if(value === "@ngInject"){
-      return true;
-    } else if (value === "@ngNoInject") {
-      return false;
+      if(value === "@ngInject"){
+        return true;
+      } else if (value === "@ngNoInject") {
+        return false;
+      }
     }
   }
 
