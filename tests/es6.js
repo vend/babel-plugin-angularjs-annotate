@@ -221,6 +221,84 @@ module.exports = {
         controller: ['a', function(a){}]
       });
     }
+  }, {
+    name: "JSDoc/NGDoc format with annotated class",
+    explicit: true,
+    noES5: false,
+    input: `
+      /**
+       * @some
+       * @other
+       * @annotations
+       *
+       * @description
+       * Example
+       *
+       * @ngInject
+       */
+      var Cls = function(dep1) {
+        this.dep1 = dep1;
+      };
+      angular.module('MyMod').service('MySvc', svc);
+    `,
+    expected: `
+      /**
+       * @some
+       * @other
+       * @annotations
+       *
+       * @description
+       * Example
+       *
+       * @ngInject
+       */
+      var Cls = function(dep1) {
+        this.dep1 = dep1;
+      };
+      Cls.$inject = ['dep1'];
+      angular.module('MyMod').service('MySvc', svc);
+    `,
+  }, {
+    name: "JSDoc/NGDoc format with annotated class",
+    explicit: true,
+    noES5: true,
+    input: `
+      /**
+       * @some
+       * @other
+       * @annotations
+       *
+       * @description
+       * Example
+       *
+       * @ngInject
+       */
+      class svc {
+        constructor (dep1) {
+          this.dep1 = dep1;
+        }
+      }
+      angular.module('MyMod').service('MySvc', svc);
+    `,
+    expected: `
+      /**
+       * @some
+       * @other
+       * @annotations
+       *
+       * @description
+       * Example
+       *
+       * @ngInject
+       */
+      class svc {
+        constructor (dep1) {
+          this.dep1 = dep1;
+        }
+      }
+      svc.$inject = ['dep1'];
+      angular.module('MyMod').service('MySvc', svc);
+    `,
   }
  ]
 };
