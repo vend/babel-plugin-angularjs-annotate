@@ -8,13 +8,13 @@
     "url": "https://github.com/schmod/babel-plugin-angularjs-annotate"
   },
   "dependencies": {
-    "babel-code-frame": "^6.26.0",
-    "babel-types": "^6.26.0",
+    "@babel/code-frame": "7.0.0-beta.44",
+    "@babel/types": "7.0.0-beta.44",
     "simple-is": "~0.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "7.0.0-beta.44",
+    "@babel/preset-env": "7.0.0-beta.44",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "chalk": "^1.1.1",

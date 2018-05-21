@@ -19,7 +19,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       angular.module('MyMod').service('MySvc', svc);
     }
   },
@@ -42,7 +42,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       angular.module('MyMod').service('MySvc', svc);
     `
   },
@@ -69,7 +69,7 @@ module.exports = {
       }
     `,
     expected: `
-      _ngInjectExport.$inject = ['$timeout'];
+      _ngInjectExport.$inject = ["$timeout"];
       export default function _ngInjectExport($timeout) {
         'ngInject';
         return 'foo';
@@ -95,7 +95,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       svc.foo = 'bar';
     }
   },
@@ -119,7 +119,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       svc.foo = 'bar';
     `
   },
@@ -143,7 +143,7 @@ module.exports = {
         return 'foo';
       }
     }
-    _ngInjectAnonymousClass.$inject = ['$timeout'];
+    _ngInjectAnonymousClass.$inject = ["$timeout"];
     `
   },
   {
@@ -165,7 +165,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       svc.foo = 'bar';
     }
   },
@@ -188,7 +188,7 @@ module.exports = {
               this.dep1 = dep1;
           }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       svc.foo = 'bar';
     }
   }, {
@@ -203,7 +203,7 @@ module.exports = {
     },
     expected: function() {
       var foo = {
-        bar: ['baz', function(baz) {
+        bar: ["baz", function(baz) {
           'ngInject';
         }]
       }
@@ -218,7 +218,7 @@ module.exports = {
     },
     expected: function() {
       angular.component('myComponent', {
-        controller: ['a', function(a){}]
+        controller: ["a", function(a){}]
       });
     }
   }, {
@@ -255,7 +255,7 @@ module.exports = {
       var Cls = function(dep1) {
         this.dep1 = dep1;
       };
-      Cls.$inject = ['dep1'];
+      Cls.$inject = ["dep1"];
       angular.module('MyMod').service('MySvc', svc);
     `,
   }, {
@@ -296,7 +296,7 @@ module.exports = {
           this.dep1 = dep1;
         }
       }
-      svc.$inject = ['dep1'];
+      svc.$inject = ["dep1"];
       angular.module('MyMod').service('MySvc', svc);
     `,
   }

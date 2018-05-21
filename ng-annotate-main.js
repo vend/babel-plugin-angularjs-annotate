@@ -8,7 +8,7 @@ const assert = require("assert");
 const ngInject = require("./nginject");
 const scopeTools = require("./scopetools");
 // const optionalAngularDashboardFramework = require("./optionals/angular-dashboard-framework");
-const t = require('babel-types');
+const t = require('@babel/types');
 
 
 const chainedRouteProvider = 1;

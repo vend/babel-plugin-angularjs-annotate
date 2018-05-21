@@ -12,7 +12,7 @@ This plugin currently supports matching and transforming all of the patterns cur
 
 ## Installation
 
-Use like any other [Babel plugin](https://babeljs.io/docs/plugins/).  
+Use like any other [Babel plugin](https://babeljs.io/docs/plugins/).
 
 Most users will want to run
 
@@ -24,7 +24,7 @@ and add the plugin to your `.babelrc` file:
 
 ```json
 {
-  "presets": ["es2015"],
+  "presets": ["@babel/preset-env"],
   "plugins": ["angularjs-annotate"]
 }
 ```
@@ -39,7 +39,7 @@ To pass this option to the plugin, [add it to your Babel configuration](https://
 
 ```json
 {
-  "presets": ["es2015"],
+  "presets": ["@babel/preset-env"],
   "plugins": [["angularjs-annotate", { "explicitOnly" : true}]]
 }
 ```
@@ -58,7 +58,7 @@ This plugin can annotate some ES6 classes and arrow functions that are not suppo
 
 Arrow functions may be annotated anywhere that a "regular" function expression may be used.
 
-**NOTE:** There are places where you _shouldn't_ use arrow functions in an Angular application.  Inside of an arrow function, the value of `this` is inherited from the lexical scope enclosing the function.  For this reason, arrow functions should not be used to declare Angular services or providers.  
+**NOTE:** There are places where you _shouldn't_ use arrow functions in an Angular application.  Inside of an arrow function, the value of `this` is inherited from the lexical scope enclosing the function.  For this reason, arrow functions should not be used to declare Angular services or providers.
 
 _If you choose to ignore this warning, we'll add the annotations to your services and providers anyway, but your application probably won't work.  Future releases may treat this condition as an error._
 

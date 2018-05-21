@@ -374,14 +374,14 @@ module.exports = {
         }
       },
       expected: function(){
-        MyDirective2.$inject = ['$stateProvider'];
+        MyDirective2.$inject = ["$stateProvider"];
 
         /* @ngInject */
         function MyDirective2($stateProvider) {
             $stateProvider.state('astate', {
                 resolve: {
                     /* @ngInject */
-                    yoyo: ['ma', function(ma) {
+                    yoyo: ["ma", function(ma) {
                     }],
                 }
             });

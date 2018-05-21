@@ -214,7 +214,7 @@ module.exports = {
           var inside = function ($q) {
             'ngInject';
           };
-          inside.$inject = ['$q'];
+          inside.$inject = ["$q"];
           return inside;
         };
       },
@@ -231,9 +231,9 @@ module.exports = {
         };
       },
       expected: function(){
-        module.exports = ['$filterProvider', function($filterProvider) {
+        module.exports = ["$filterProvider", function($filterProvider) {
           'ngInject';
-          ordinalSuffixFilter.$inject = ['ordinalSuffix'];
+          ordinalSuffixFilter.$inject = ["ordinalSuffix"];
           function ordinalSuffixFilter(ordinalSuffix) {
             'ngInject';
           }

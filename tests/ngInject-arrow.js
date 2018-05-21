@@ -270,12 +270,12 @@ module.exports = {
             $stateProvider.state('astate', {
                 resolve: {
                     /* @ngInject */
-                    yoyo: ['ma', (ma) => {
+                    yoyo: ["ma", (ma) => {
                     }],
                 }
             });
         };
-        MyDirective2.$inject = ['$stateProvider'];
+        MyDirective2.$inject = ["$stateProvider"];
       }
     }
   ].map(t => { t.explicit=true; return t; })

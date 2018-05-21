@@ -1,6 +1,6 @@
 'use strict';
 
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const diff = require('diff');
 const chalk = require('chalk');
 const indent = require('indent-string');
@@ -10,7 +10,7 @@ const path = require('path');
 const resolve = (file) => path.resolve(__dirname, file);
 
 const ES6presets = [
-  [ "env", { exclude: ['transform-es2015-function-name'] } ]
+  [ "@babel/preset-env", { exclude: ['transform-function-name'] } ]
 ];
 
 const plugin = resolve("../babel-ng-annotate.js");
@@ -81,22 +81,22 @@ function runTest(test) {
 
 function doTransform(t, test, presets, logPrefix){
 
-  let out = babel.transform(fnBody(test.input),  { plugins: [plugin], presets: presets });
-  let expected = babel.transform(fnBody(test.expected), { plugins: [], presets: presets });
+  let out = babel.transform(fnBody(test.input),  { plugins: [plugin], presets: presets, compact: true });
+  let expected = babel.transform(fnBody(test.expected), { plugins: [], presets: presets, compact: true });
 
   t.equals(out.code.trim().replace(/\n/g,''), expected.code.trim().replace(/\n/g,''), logPrefix + ': ' + test.name);
 
   // If test is marked as explicit, it should still work when explicitOnly is on
   if(test.explicit){
-    out = babel.transform(fnBody(test.input),  { plugins: [[plugin, {explicitOnly: true}]], presets:presets });
+    out = babel.transform(fnBody(test.input),  { plugins: [[plugin, {explicitOnly: true}]], presets:presets, compact: true });
 
     t.equals(out.code.trim().replace(/\n/g,''), expected.code.trim().replace(/\n/g,''), logPrefix + ' explicitOnly: ' + test.name);
   }
 
   // If test is marked as implicit, no transformation should occur when explicitOnly is on
   if(test.implicit){
-    out = babel.transform(fnBody(test.input),  { plugins: [[plugin, {explicitOnly: true}]], presets: presets });
-    expected = babel.transform(fnBody(test.input), { plugins: [], presets: presets });
+    out = babel.transform(fnBody(test.input),  { plugins: [[plugin, {explicitOnly: true}]], presets: presets, compact: true });
+    expected = babel.transform(fnBody(test.input), { plugins: [], presets: presets, compact: true });
 
     t.equals(out.code.trim().replace(/\n/g,''), expected.code.trim().replace(/\n/g,''), logPrefix + 'explicitOnly: ' + test.name);
   }

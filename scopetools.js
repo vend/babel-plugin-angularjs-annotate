@@ -5,7 +5,7 @@
 "use strict";
 
 const is = require("simple-is");
-const t = require("babel-types");
+const t = require("@babel/types");
 
 module.exports = {
     isReference: isReference

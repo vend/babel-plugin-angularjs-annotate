@@ -5,8 +5,8 @@
 "use strict";
 
 const is = require("simple-is");
-const t = require('babel-types');
-const codeFrame = require("babel-code-frame");
+const t = require('@babel/types');
+const codeFrame = require("@babel/code-frame");
 
 module.exports = {
     inspectComment: inspectComment,
