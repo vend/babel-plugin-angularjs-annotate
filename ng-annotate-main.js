@@ -527,7 +527,6 @@ function insertArray(ctx, path) {
             t.arrayExpression(elems)
         )
     );
-    path.scope.crawl();
 
 }
 
@@ -793,7 +792,6 @@ function judgeInjectArraySuspect(path, ctx) {
         if (t.isExportDefaultDeclaration(path.parent) && !node.id) {
           // export default function(a) {}
           node.id = path.scope.generateUidIdentifier('ngInjectExport');
-          path.parentPath.scope.crawl();
           path.parentPath.insertBefore(buildInjectExpression(node.params, node.id.name));
       } else {
           // /*@ngInject*/ function foo($scope) {}
@@ -803,7 +801,6 @@ function judgeInjectArraySuspect(path, ctx) {
         isFunctionExpressionWithArgs(node.expression.right) && !path.get("expression.right").$seen) {
         // /*@ngInject*/ foo.bar[0] = function($scope) {}
         let inject = buildInjectExpression(node.expression.right.params, t.cloneDeep(node.expression.left));
-        path.parentPath.scope.crawl();
         path.insertAfter(inject);
 
     } else if (path = followReference(path)) {
@@ -834,7 +831,6 @@ function judgeInjectArraySuspect(path, ctx) {
             }
             block.unshiftContainer("body", [expr]);
         } else {
-            path.parentPath.scope.crawl();
             path.insertBefore(buildInjectExpression(params, name));
         }
     }
@@ -845,7 +841,6 @@ function judgeInjectArraySuspect(path, ctx) {
             trailingComments = path.node.trailingComments;
             path.node.trailingComments = [];
         }
-        path.parentPath.scope.crawl();
         let newNode = path.insertAfter(buildInjectExpression(params, name));
         newNode.trailingComments = trailingComments;
     }
