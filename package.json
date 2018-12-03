@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-angularjs-annotate",
+  "name": "@vendhq/babel-plugin-angularjs-annotate",
   "version": "0.20.0",
   "description": "Babel plugin to add angularjs dependency injection annotations",
   "main": "babel-ng-annotate.js",
@@ -43,5 +43,8 @@
     "build-site": "browserify docs/repl.js -o docs/repl-browser.js -t babelify --presets env"
   },
   "author": "Andrew Schmadel",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
